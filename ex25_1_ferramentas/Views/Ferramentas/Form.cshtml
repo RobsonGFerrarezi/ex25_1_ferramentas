@@ -1,0 +1,58 @@
+﻿@model ex25_1_ferramentas.Models.FerramentasViewModel
+
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.operacao == "A")
+{
+    <h2>Alteração de Ferramenta</h2>
+}
+else
+{
+    <h2>Inclusão de Ferramenta</h2>
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="salvar" method="post">
+            <input type="hidden" name="operacao" value="@ViewBag.operacao" />
+
+            <div class="form-group">
+                @if (ViewBag.operacao == "A")
+                {
+                    <label class="control-label">Código</label>
+                    <input asp-for="Id" class="form-control disabled" readonly />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Descrição</label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Fabricante</label>
+                <input asp-for="FabricanteId" class="form-control" />
+                <span asp-validation-for="FabricanteId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar para a listagem</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

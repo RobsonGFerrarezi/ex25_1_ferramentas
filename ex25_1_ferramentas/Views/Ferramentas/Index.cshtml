@@ -1,0 +1,58 @@
+﻿@model List<ex25_1_ferramentas.Models.FerramentasViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listagem de ferramentas</h2>
+
+<p>
+    <a asp-action="Create">Novo Cadastro</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Código
+            </th>
+            <th>
+                Descrição
+            </th>
+            <th>
+                Fabricante
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FabricanteId)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                    <a href="javascript:excluir(@item.Id)">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function excluir(id) {
+        if (confirm('Deseja mesmo apagar?'))
+            location.href = "ferramenta/Apagar?id=" + id;
+    }
+
+</script>
